@@ -21,17 +21,10 @@ export class LoginComponent implements OnInit {
   users: any;
   password: string = '';
   waiter: string = '';
+  warning = false;
 
 
   constructor(private authService: AuthService, private router: Router, private afAuth: AngularFireAuth, private db: AngularFirestore) {
-
-    this.isProgressVisible = false;
-
-    this.loginForm = new FormGroup({
-        'email': new FormControl('', [Validators.required, Validators.email]),
-        'password': new FormControl('', Validators.required)
-    });
-
     this.firebaseErrorMessage = '';
 }
 
@@ -46,47 +39,22 @@ export class LoginComponent implements OnInit {
 }
 
 loginUser() {
-
-    // if(this.loginForm.value.email == this.users[0].username){
-    //   console.log('ok');
-    // }else{
-    //   console.log('not ok');
-    // }
-    
-    if(this.waiter == this.users[0].username && this.password == this.users[0].password){
-      console.log('ok');
-    }else{
-      console.log('not ok');
-      
-    }
-
-    if (this.loginForm.invalid)
-        return;
-
-    // this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
-    //     this.isProgressVisible = false;                     // no matter what, when the auth service returns, we hide the progress indicator
-    //     if (result == null) {                               // null is success, false means there was an error
-    //         console.log('logging in...');
-    //         this.router.navigate(['/home']);                // when the user is logged in, navigate them to dashboard
-    //     }
-    //     else if (result.isValid == false) {
-    //         console.log('login error', result);
-    //         this.firebaseErrorMessage = result.message;
-    //     }
-    // });
-   
+    this.users.forEach((user: any) => {
+      if(this.waiter == user.username && this.password == user.password){
+        this.router.navigate(['/home'])
+      }else if(this.waiter == user.username && this.password != user.password){
+        console.log('wrong password');
+        this.warning = true;
+      }
+    });
 }
 
 chosenWaiter(waiter: string){
   this.waiter = waiter;
-  console.log(this.waiter);
 }
 
  click(num: number){
-  //  this.password.push(num);
   this.password += num.toString();
-   console.log(this.password);
-   
  }
 
  deletePass(){
