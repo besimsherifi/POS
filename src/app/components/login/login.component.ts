@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
 loginUser() {
     this.users.forEach((user: any) => {
       if(this.waiter == user.username && this.password == user.password){
-        this.router.navigate(['/home'])
-      }else if(this.waiter == user.username && this.password != user.password){
+        this.router.navigate(['/home']);
+      }else if(this.waiter != user.username || this.password != user.password){
         console.log('wrong password');
         this.warning = true;
       }
@@ -51,6 +51,10 @@ loginUser() {
 
 chosenWaiter(waiter: string){
   this.waiter = waiter;
+}
+
+isActive(addClass: any){
+  return this.waiter == addClass;
 }
 
  click(num: number){
