@@ -15,7 +15,10 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CodeInputModule } from 'angular-code-input';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
+
 
 
 
@@ -24,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavBarComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    CodeInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,23 +7,33 @@
 </div>
 
 
-<div id="container"> 
-    <input type="text" name="" id="" class="password-input" [(ngModel)]="password" placeholder="Password">
-    <p *ngIf="warning">please check your login info</p>
-
-    <ul id="keyboard">   
-        <li class="letter" (click)="click(1)">1</li>  
-        <li class="letter" (click)="click(2)">2</li>  
-        <li class="letter" (click)="click(3)">3</li>  
-        <li class="letter clearl" (click)="click(4)">4</li>  
-        <li class="letter" (click)="click(5)">5</li>  
-        <li class="letter" (click)="click(6)">6</li> 
-      
-        <li class="letter clearl" (click)="click(7)">7</li>  
-        <li class="letter" (click)="click(8)">8</li>  
-        <li class="letter" (click)="click(9)">9</li>  
-        <li class="switch" (click)="click(0)">0</li>
-         <li class="return" (click)="loginUser()">login</li>
-         <li class="delete lastitem"(click)="deletePass()"><</li>   
-    </ul>  
+<div class="container" id="container"> 
+    <div class="row">
+        <!-- <input type="password" maxlength = "4" id="" class="password-input" [(ngModel)]="password" placeholder="Password"> -->
+        <code-input [isCodeHidden]="true"
+              [codeLength]="4"
+              (codeChanged)="onCodeChanged($event)"
+              (codeCompleted)="onCodeCompleted($event)"
+              [code]="password"
+              ngDefaultControl>"
+  </code-input>
+        <p *ngIf="warning">please check your login info</p>
+        </div>
+        <div class="keyboard">
+        <ul id="keyboard">   
+            <li class="letter" (click)="onCodeChanged(1)">1</li>  
+            <li class="letter" (click)="onCodeChanged(2)">2</li>  
+            <li class="letter" (click)="onCodeChanged(3)">3</li>  
+            <li class="letter clearl" (click)="onCodeChanged(4)">4</li>  
+            <li class="letter" (click)="onCodeChanged(5)">5</li>  
+            <li class="letter" (click)="onCodeChanged(6)">6</li> 
+          
+            <li class="letter clearl" (click)="onCodeChanged(7)">7</li>  
+            <li class="letter" (click)="onCodeChanged(8)">8</li>  
+            <li class="letter" (click)="onCodeChanged(9)">9</li>  
+            <li class="switch" (click)="onCodeChanged(0)">0</li>
+             <li class="return" (click)="loginUser()">login</li>
+             <li class="delete lastitem"(click)="deletePass()"><</li>   
+        </ul> 
+    </div>
 </div>  
