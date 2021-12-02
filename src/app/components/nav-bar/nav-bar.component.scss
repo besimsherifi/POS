@@ -1,0 +1,45 @@
+.navbar{
+    background: #3C4049;
+    color: white;
+}
+
+.time-and-date{
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+li{
+    cursor: pointer;
+}
+
+mat-icon{
+    margin: -2px 0px 0px 5px;
+    cursor: pointer;
+}
+
+.waiter{
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+
+.reservation{
+    border: 1px solid #589442;
+    border-radius: 3px;
+    padding: 5px 7px;
+    background: #589442;
+    color: white;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.walk-in{
+    border: 1px solid grey;
+    border-radius: 3px;
+    padding: 5px 7px;
+    cursor: pointer;
+}

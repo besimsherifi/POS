@@ -1,0 +1,39 @@
+
+
+<div style="display: flex; justify-content: center; padding-top: 80px;">
+    <div *ngFor="let user of users; let i = index">
+    <button class="button" [ngClass]="{active: isActive(user.username)}" (click)="chosenWaiter(user.username)" style="cursor: pointer;">{{user.username}}</button>
+</div>
+</div>
+
+
+<div class="container" id="container"> 
+    <div class="row">
+        <!-- <input type="password" maxlength = "4" id="" class="password-input" [(ngModel)]="password" placeholder="Password"> -->
+        <code-input [isCodeHidden]="true"
+              [codeLength]="4"
+              (codeChanged)="onCodeChanged($event)"
+              (codeCompleted)="onCodeCompleted($event)"
+              [code]="password"
+              ngDefaultControl>"
+  </code-input>
+        <p *ngIf="warning">please check your login info</p>
+        </div>
+        <div class="keyboard">
+        <ul id="keyboard">   
+            <li class="letter" (click)="onCodeChanged(1)">1</li>  
+            <li class="letter" (click)="onCodeChanged(2)">2</li>  
+            <li class="letter" (click)="onCodeChanged(3)">3</li>  
+            <li class="letter clearl" (click)="onCodeChanged(4)">4</li>  
+            <li class="letter" (click)="onCodeChanged(5)">5</li>  
+            <li class="letter" (click)="onCodeChanged(6)">6</li> 
+          
+            <li class="letter clearl" (click)="onCodeChanged(7)">7</li>  
+            <li class="letter" (click)="onCodeChanged(8)">8</li>  
+            <li class="letter" (click)="onCodeChanged(9)">9</li>  
+            <li class="switch" (click)="onCodeChanged(0)">0</li>
+             <li class="return" (click)="loginUser()">login</li>
+             <li class="delete lastitem"(click)="deletePass()"><</li>   
+        </ul> 
+    </div>
+</div>  
