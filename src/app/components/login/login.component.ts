@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.db.collection('users').valueChanges().subscribe((res) => {
       this.users = res
-    })
+    });
   }
 
   loginUser() {

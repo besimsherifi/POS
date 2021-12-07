@@ -1,1 +1,11 @@
 <app-nav-bar></app-nav-bar>
+
+<div style="display: flex;">
+<div class="tables"
+    *ngFor="let item of tables"
+    [ngClass]="item.reserver ? 'red' : 'green'">
+    <h2>{{item.number}}</h2>
+    <h1>{{item?.reserver}}</h1>
+    <h5>{{item.persons}}p</h5>
+</div>
+</div>

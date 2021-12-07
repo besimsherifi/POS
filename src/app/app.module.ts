@@ -18,6 +18,7 @@ import { MaterialModule } from './material.module';
 import { CodeInputModule } from 'angular-code-input';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 
@@ -41,7 +42,8 @@ import { ReservationsComponent } from './components/reservations/reservations.co
     AngularFireStorageModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CodeInputModule
+    CodeInputModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
