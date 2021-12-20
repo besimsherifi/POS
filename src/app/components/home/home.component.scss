@@ -1,22 +1,78 @@
 .red{
     background: #5492C0;
-    h5{
-        // border: 1px solid white;
-        // border-radius: 2px;
-    }
 }
 
 .green{
     background-color: #74AD5F;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 
 .tables{
-    border-radius: 5px;
+    border-radius: 15px;
     text-align: center;
-    width: 10%;
+    width: 100%;
+    cursor: pointer;
+    min-height: 96px;
+    max-width: 140px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    h1, h2, h3, h4, h6{
+        margin:0;
+    }
+}
+
+
+.lamps{
+    width: 120px;
+    height: 80px;
+    margin-top: 10px;
+}
+
+
+.flowers{
+    width: 90px;
+    height: 80px;
+    margin-right: 50px;
+}
+
+
+.table-bottom-margin{
+    margin-bottom: 15px;
+}
+
+.sofa{
+    height: 100px;
+}
+
+.round-table{
+    border-radius: 50%;
+    color: red;
+    display: none;
+}
+
+.areas{
+    border-radius: 5px;
+    padding: 0px 20px;
+    margin: 0;
+}
+
+.center-align-text{
+    text-align: center;
+}
+
+.spaces{
+    margin-right: 5px;
     cursor: pointer;
 }
 
-h1, h2, h3, h4, h5, h6{
-    margin:0;
+.active-floor{
+    background: #d9d9d9;
+    border-radius: 5px;
 }

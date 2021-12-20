@@ -19,6 +19,9 @@ import { CodeInputModule } from 'angular-code-input';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TableDetailComponent } from './components/table-detail/table-detail.component';
+
 
 
 
@@ -30,7 +33,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     LoginComponent,
     HomeComponent,
     NavBarComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    TableDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     MaterialModule,
     CodeInputModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
