@@ -1,11 +1,106 @@
 <app-nav-bar></app-nav-bar>
 
-<div style="display: flex;">
-<div class="tables"
-    *ngFor="let item of tables"
-    [ngClass]="item.reserver ? 'red' : 'green'">
-    <h2>{{item.number}}</h2>
-    <h1>{{item?.reserver}}</h1>
-    <h5>{{item.persons}}p</h5>
+<div style="display: flex; justify-content: center;">
+    <div class="spaces" [ngClass]="{'active-floor': mainFloor}" (click)="mainFloor = true">
+        <h3 class="areas">Main Area</h3>
+        <p class="center-align-text">54p</p>
+    </div>
+    <div class="spaces" [ngClass]="{'active-floor': !mainFloor}" (click)="mainFloor = false">
+        <h3 class="areas">Terrace</h3>
+        <p class="center-align-text">20p</p>
+    </div>
 </div>
+
+<div class="container" *ngIf="mainFloor">
+    <div class="row table-bottom-margin" style="margin-top: 10px;">
+        <img src="../../../assets/lampp.png" alt="" class="lamps">
+
+        <div class="col" *ngFor="let table of tables | slice:0:3; let i = index;" >
+            <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+
+        <div class="col" *ngFor="let table of tables | slice:3:6; let i = index;" >
+            <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+        <img src="../../../assets/lampp.png" alt="" class="lamps">
+    </div>
+    <div class="row table-bottom-margin">
+        <div class="col" *ngFor="let table of tables | slice:6:11; let i = index" >
+            <div class="tables" [ngClass]="[table.reserver ? 'red' : 'green']" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row table-bottom-margin">
+        <div class="col-md-6">
+            <img src="../../../assets/flower.png" class="flowers" alt="">
+            <img src="../../../assets/flower.png" class="flowers" alt="">
+        </div>
+        <div class="col" *ngFor="let table of tables | slice:14:16">
+            <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)" >
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row table-bottom-margin">
+        <div class="col" *ngFor="let table of tables | slice:11:14">
+            <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+        <div class="col">
+            <img src="../../../assets/sofa.png" class="sofa" alt="">
+        </div>
+        <div class="col">
+            <img src="../../../assets/flower.png" class="flowers" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="!mainFloor">
+    <div class="row table-bottom-margin">
+        <div class="col" *ngFor="let table of tables | slice:16:19; let i = index;" >
+            <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row table-bottom-margin">
+        <div class="col" *ngFor="let table of tables | slice:19:21; let i = index;" >
+            <div class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
+                <h2 >{{table.number}}</h2>
+                <h1>{{table?.reserver}}</h1>
+                <h5>{{table.persons}}p</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="!mainFloor" style="width:100%;
+position: absolute;
+bottom:0;">
+    <div class="row">
+        <div class="col" style="display: flex; justify-content: center;">
+            <img src="../../../assets/door.png" alt="">
+        </div>
+    </div>
 </div>
