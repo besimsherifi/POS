@@ -12,42 +12,28 @@ import { Table } from 'src/app/models/table-model';
 export class TableDetailComponent implements OnInit, OnDestroy {
 
   table: Table[] = [];
-  tableId: any; 
+  tableId: number = 0; 
   routeSub:Subscription = new Subscription;
 
   constructor(private db: AngularFirestore, private activatedRoute: ActivatedRoute) { }
 
    ngOnInit(){
-     this.getId()
-      this.getData();
-   
-  }
-
-  getData(){
-    setTimeout(() => {
-      this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges().subscribe((res:any)=>{
-        this.table = res;
-        console.log(res);
-        console.log(this.table,"table");
-        
+    this.routeSub = this.activatedRoute.params.subscribe((params: Params)=>{
+      console.log(params,'params');
+      this.tableId = Number(params['id']);
+      console.log(this.tableId);
       });
-    }, 5000);
-    
-  }
-
-  getId(){
-    setTimeout(() => {
-      this.routeSub = this.activatedRoute.params.subscribe((params: Params)=>{
-        this.tableId = params['id'];
-        console.log(this.tableId);
-        });
-    }, 4000);
+    this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges().subscribe((res:any)=>{
+      this.table = res;
+      console.log(res);
+      console.log(this.table,"table");
+    });
    
   }
 
 
 
-
+  
 
   ngOnDestroy(){
     if(this.routeSub){
