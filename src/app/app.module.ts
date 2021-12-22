@@ -21,6 +21,8 @@ import { ReservationsComponent } from './components/reservations/reservations.co
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableDetailComponent } from './components/table-detail/table-detail.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpHeadersInterceptor } from './services/http-headers.interceptor';
 
 
 
@@ -39,6 +41,7 @@ import { TableDetailComponent } from './components/table-detail/table-detail.com
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -50,7 +53,13 @@ import { TableDetailComponent } from './components/table-detail/table-detail.com
     BsDropdownModule.forRoot(),
     DragDropModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpHeadersInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

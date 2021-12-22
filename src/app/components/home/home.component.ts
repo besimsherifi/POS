@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { Table } from 'src/app/models/table-model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,19 @@ export class HomeComponent implements OnInit {
   tables:Table[] = [];
   mainFloor = true;
  
+  onClick(){
+    this.http.get('https://api.spoonacular.com/recipes/complexSearch?query=marinade').subscribe((res)=>{
+      console.log(res);
+      
+    })
+  }
 
-  constructor(private dataService: DataService, private router: Router, private afAuth: AngularFireAuth, private db: AngularFirestore) { }
+  constructor(private router: Router, private db: AngularFirestore, private http:HttpClient, private data: DataService) { }
 
   ngOnInit(): void {
-    this.db.collection('tables', ref => ref.orderBy('number','asc')).valueChanges().subscribe((res:any) => {
-      this.tables = res
-      console.log(res);
-    });
+    this.data.getTables().subscribe((res:any) => {
+      this.tables = res;
+    })
   }
   
   tableDetail(id:number){
