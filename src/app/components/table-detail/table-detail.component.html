@@ -1,2 +1,47 @@
-{{table[0]?.number}}
-{{table[0]?.persons}}
+<app-nav-bar [showWaiter]="false" [tableNumber]="table[0]?.number"></app-nav-bar>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="images">
+                    <div class="pointer" (click)="getMeal('breakfast')">
+                        <img src="../../../assets/breakfast.png" alt="">
+                        <p>Breakfast</p>
+                    </div>
+                    <div class="pointer" (click)="getMeal('appetizer')">
+                        <img src="../../../assets/appetizer1.png" alt="">
+                        <p>Appetizer</p>
+                    </div>
+                    <div class="pointer" (click)="getMeal('meal')">
+                        <img src="../../../assets/meal.png" alt="">
+                        <p>Meals</p>
+                    </div>
+                    <div class="pointer" (click)="getMeal('pasta')">
+                        <img src="../../../assets/pasta.png" alt="">
+                        <p>Pasta</p>
+                    </div>
+                    <div class="pointer" (click)="getMeal('dessert')">
+                        <img src="../../../assets/sweets.png" alt="">
+                        <p>Dessert</p>
+                    </div>
+                    <div class="pointer" (click)="getMeal('beverages')">
+                        <img src="../../../assets/liquor.png" alt="">
+                        <p>Beverages</p>
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+            <div class="meal-div">
+                <div class="meal-card" *ngFor="let meal of meals; let i = index;">
+                    <img src="{{meal.image}}" alt="">
+                    {{ (meal.title.length >= 20)? (meal.title | slice:0:15)+'..':(meal.title) }}
+                    <h2 >{{price[i]}}$</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color: green;">
+            <input type="text" name="reserver">
+        </div>
+    </div>
+</div>

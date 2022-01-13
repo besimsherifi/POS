@@ -11,7 +11,8 @@ export const environment = {
     storageBucket: "mypos-d09d1.appspot.com",
     messagingSenderId: "843750407084",
     appId: "1:843750407084:web:2df00aaff598f76c189809"
-  }
+  },
+  BASE_URL:'https://api.spoonacular.com'
 };
 
 /*

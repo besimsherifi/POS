@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -12,6 +12,8 @@ export class NavBarComponent implements OnInit {
 
   waiter : string = '';
   open = true;
+  @Input() showWaiter: boolean = true;
+  @Input() tableNumber: any;
 
   close() {
     this.open = false;

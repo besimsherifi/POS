@@ -5,16 +5,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <div [routerLink]="['/reservations']" routerLinkActive="router-link-active" class="reservation d-flex">
+        <div [routerLink]="['/reservations']" routerLinkActive="router-link-active" class="reservation d-flex" *ngIf="showWaiter">
           <li>Reservation</li>
         <mat-icon>
           import_contacts
-          </mat-icon>
-        </div>
-        <div class="walk-in d-flex">
-          <li>Walk-In</li>
-          <mat-icon>
-            directions_walk
           </mat-icon>
         </div>
       </ul>
@@ -24,7 +18,7 @@
       <p style="font-size: 20px; margin: 0;">{{currentDate | date:'h:mm'}}</p>
     </div>
 
-  <div class="waiter d-flex">
+  <div class="waiter d-flex" *ngIf="showWaiter">
      <div class="container">
       <div class="btn-group" dropdown>
         <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
@@ -37,8 +31,9 @@
         </ul>
       </div>
     </div>
-
     </div>
+    <p *ngIf="!showWaiter" style="margin: 0;">Table #{{tableNumber}}</p>
+
   </nav>
 
 
