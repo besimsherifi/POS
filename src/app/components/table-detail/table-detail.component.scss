@@ -1,0 +1,29 @@
+img{
+    height: 100px;
+}
+
+.images{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 10px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.meal-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.meal-card{
+    display: grid;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 5px 5px 10px #d9e7cc;
+    cursor: pointer;
+}

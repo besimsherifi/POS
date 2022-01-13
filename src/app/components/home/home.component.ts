@@ -15,13 +15,6 @@ export class HomeComponent implements OnInit {
 
   tables:Table[] = [];
   mainFloor = true;
- 
-  onClick(){
-    this.http.get('https://api.spoonacular.com/recipes/complexSearch?query=marinade').subscribe((res)=>{
-      console.log(res);
-      
-    })
-  }
 
   constructor(private router: Router, private db: AngularFirestore, private http:HttpClient, private data: DataService) { }
 
