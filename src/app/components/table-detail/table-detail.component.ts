@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/table-model';
@@ -25,9 +26,16 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params)=>{
       this.tableId = Number(params['id']);
       });
-    this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges().subscribe((res:any)=>{
+    this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges({ idField: 'propertyId' }).subscribe((res:any)=>{
       this.table = res;
+      console.log(res);
+      
     });   
+  }
+
+
+  onSubmit(form: NgForm){
+    this.db.collection('tables').doc(this.table[0].propertyId).update({reserver: form.controls.reserver.value});
   }
 
   
@@ -51,8 +59,7 @@ export class TableDetailComponent implements OnInit, OnDestroy {
       this.price.push(this.getRandomInt());                 //random number generator for prices
     } 
   }
-
-
+  
 
 
 

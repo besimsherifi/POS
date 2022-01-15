@@ -41,7 +41,10 @@
             </div>
         </div>
         <div class="col-md-4" style="background-color: green;">
-            <input type="text" name="reserver">
+            <h3>{{table[0]?.reserver}}</h3>
+            <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <input type="text" name="reserver" ngModel>
+            </form>
         </div>
     </div>
 </div>
