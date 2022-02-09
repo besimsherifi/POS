@@ -40,14 +40,16 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges({ idField: 'propertyId' }).subscribe((res:any)=>{
       this.table = res;
       this.order = res[0].order;
-      this.tempOrder = res[0].order;
+      if(res[0].order){
+        this.tempOrder = res[0].order;
+      }
       console.log(this.order);
       
     }); 
 
 
     this.order.forEach((x:any) => { this.counts[x.meal] = (this.counts[x.meal] || 0) + 1; });
-    console.log(this.counts)
+    // console.log(this.counts)
 
     
     
@@ -81,13 +83,16 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     } 
   }
 
-  mealClick(meal: any, price:any){
+  mealClick(meal: any, price:any, quantity: any){
     this.tempOrder.push({meal, price});     //kjo perdoret se firebase nuk i pranon rekordet duplikat ose si regjistron
     // console.log(this.tempOrder);
     
+      
       this.db.collection('tables').doc(this.table[0].propertyId).update({order:(this.tempOrder)})
 
-      this.order.forEach((x:any) => { this.counts[x.meal] = (this.counts[x.meal] || 0) + 1; });
+      if(this.order){
+        this.order.forEach((x:any) => { this.counts[x.meal] = (this.counts[x.meal] || 0) + 1; });
+      }
       console.log(this.counts)
       
 
