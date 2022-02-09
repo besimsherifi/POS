@@ -33,7 +33,7 @@
             </div>
             <hr>
             <div class="meal-div">
-                <div class="meal-card" *ngFor="let meal of meals; let i = index;">
+                <div class="meal-card" (click)="mealClick(meal.title,price[i], meal.quantity)" *ngFor="let meal of meals; let i = index;">
                     <img src="{{meal.image}}" alt="">
                     {{ (meal.title.length >= 20)? (meal.title | slice:0:15)+'..':(meal.title) }}
                     <h2 >{{price[i]}}$</h2>
@@ -45,6 +45,11 @@
             <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
             <input type="text" name="reserver" ngModel>
             </form>
+            <div *ngFor="let item of order">
+                <h1>{{item.meal}}</h1>
+                <!-- <p>{{counts[0]}}</p> -->
+            </div>
         </div>
+        
     </div>
 </div>
