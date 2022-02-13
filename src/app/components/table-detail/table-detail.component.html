@@ -33,21 +33,92 @@
             </div>
             <hr>
             <div class="meal-div">
-                <div class="meal-card" (click)="mealClick(meal.title,price[i], meal.quantity)" *ngFor="let meal of meals; let i = index;">
+                <div class="meal-card" (click)="mealClick(meal.title,price[i], meal.quantity = 1)" *ngFor="let meal of meals; let i = index;">
                     <img src="{{meal.image}}" alt="">
                     {{ (meal.title.length >= 20)? (meal.title | slice:0:15)+'..':(meal.title) }}
                     <h2 >{{price[i]}}$</h2>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="background-color: green;">
+        <!-- <div class="col-md-4" style="background-color: green;">
             <h3>{{table[0]?.reserver}}</h3>
             <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
             <input type="text" name="reserver" ngModel>
             </form>
-            <div *ngFor="let item of order">
-                <h1>{{item.meal}}</h1>
-                <!-- <p>{{counts[0]}}</p> -->
+
+            <div class="row" style="display: flex;">
+                <div class="col max-width-40">
+                <p class="max-width-40">Q</p>
+                </div>
+                <div class="col">
+                <p>Product</p>
+                </div>
+                <div class="col">
+                <p>Price</p>
+                </div>
+                <div><p>actions</p></div>
+
+            </div>
+
+            <div *ngFor="let item of order" style="display:flex">
+                <div class="row" style="width: 100%;">
+                    <div class="col max-width-40">
+                        <p *ngIf="item.quantity > 0">{{item.quantity}}</p>
+                    </div>
+                    <div class="col">
+                        <h2>{{item.meal}}</h2>
+                    </div>
+                    <div class="col">
+                        <h5>{{item.price}}</h5>
+                    </div>
+                </div>
+                <button (click)="incrementMeal(item)">+</button>
+                <button (click)="decrementMeal(item)">-</button>
+            </div>
+            <div style="display: flex; justify-content: space-around;">
+                <p>Total: {{total}}$</p>
+                <button (click)="calculateTotal()">Buy</button>
+            </div>
+        </div> -->
+
+        <div class="col-md-4" style="background-color: green;">
+            <div class="row">
+                <h3>{{table[0]?.reserver}}</h3>
+                <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
+                <input type="text" name="reserver" ngModel>
+                </form>
+    
+                <div class="row" style="display: contents;">
+                    <div class="col max-width-40">
+                        <p class="max-width-40">Q</p>
+                        <div class="col" *ngFor="let item of order">
+                            <p>{{item.quantity}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        <p>Product</p>
+                        <div class="col" *ngFor="let item of order">
+                            <h2>{{item.meal}}</h2>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <p>Price</p>
+                        <div class="col" style="display: flex;" *ngFor="let item of order">
+                            <p>{{item.price}}</p>
+                            <div style="display: flex;">
+                                <button (click)="incrementMeal(item)">+</button>
+                                <button (click)="decrementMeal(item)">-</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+                
+                
+                </div>
             </div>
         </div>
         
