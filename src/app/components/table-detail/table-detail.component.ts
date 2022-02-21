@@ -25,7 +25,6 @@ export class TableDetailComponent implements OnInit, OnDestroy {
   order: any = [];
   total: number = 0;
 
-
   constructor(private db: AngularFirestore, private activatedRoute: ActivatedRoute, private http: HttpClient, private data: DataService) { }
 
     ngOnInit(){
@@ -35,7 +34,6 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges({ idField: 'propertyId' }).subscribe((res:any)=>{
       this.table = res;
       this.order = res[0].order;
-           
     }); 
   }
 
