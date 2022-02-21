@@ -35,7 +35,6 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.db.collection('tables', ref => ref.where("number", "==", this.tableId)).valueChanges({ idField: 'propertyId' }).subscribe((res:any)=>{
       this.table = res;
       this.order = res[0].order;
-           
     }); 
   }
 
@@ -68,17 +67,22 @@ export class TableDetailComponent implements OnInit, OnDestroy {
 
   mealClick(meal: any, price:any, quantity: number){
     this.db.collection('tables').doc(this.table[0].propertyId).update({
-    order:arrayUnion({meal,price,quantity})});
+      order:arrayUnion({meal,price,quantity})});
       this.total += price;
+      this.updateTotal(this.total);
   }
 
   incrementMeal(meal: any){
     meal.quantity += 1;
-    this.total += meal.price
+    this.total += meal.price;
+    this.updateTotal(this.total);
   }
 
   decrementMeal(meal: any){
-    this.total -= meal.price
+    if(this.total < 0){
+      this.total = 0;
+    }
+    this.updateTotal(this.total);
     meal.quantity -= 1;
     if(meal.quantity == 0){
       this.deleteMeal(meal);
@@ -89,11 +93,16 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.order.forEach((item:any) => {
       if (item == meal){
         meal.quantity = 1;
-        this.total -= meal.price    
+        this.total -= meal.price;
+        this.updateTotal(this.total);
         this.db.collection('tables').doc(this.table[0].propertyId).update({
           order:arrayRemove(meal)})
       }
     });
+  }
+
+  updateTotal(price: number){
+    this.db.collection('tables').doc(this.table[0].propertyId).update({total: price});
   }
 
   // calculateTotal(){
@@ -109,3 +118,7 @@ export class TableDetailComponent implements OnInit, OnDestroy {
   }
 
 }
+
+
+
+//todo 1 dialog tchilet kur da boje buy ene ato kit tresetohen vlerat
