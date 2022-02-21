@@ -25,7 +25,6 @@ export class TableDetailComponent implements OnInit, OnDestroy {
   order: any = [];
   total: number = 0;
 
-
   constructor(private db: AngularFirestore, private activatedRoute: ActivatedRoute, private http: HttpClient, private data: DataService) { }
 
     ngOnInit(){
