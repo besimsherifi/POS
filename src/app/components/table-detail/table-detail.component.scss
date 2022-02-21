@@ -31,3 +31,42 @@ img{
 .max-width-40{
     max-width: 40px;
 }
+
+
+.total-div{
+    display: flex; 
+    justify-content: space-around; 
+    position: fixed;
+    bottom: 0;
+    margin: 0px 0px 10px 100px;
+}
+
+.right-side-div{
+    background-color: #b9c9c2;
+    height: 100vh;
+    border-radius: 5px;
+}
+
+.btn{
+    background-color: #88a597;
+    max-height: 40px;
+    margin-right: 5px;
+}
+
+.input-div{
+    display: flex;
+    margin-bottom: 25px;
+        input{
+        border: none;
+        border-radius: 5px;
+        background: #b9c9c2;
+        border-bottom: 1px groove green;
+        }
+        h3{
+            margin: 0px 10px 0px 0px;
+        }  
+}
+
+.reserver{
+    margin: 10px;
+}

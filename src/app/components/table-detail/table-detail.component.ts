@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { arrayUnion } from 'firebase/firestore';
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/table-model';
 import { DataService } from 'src/app/services/data.service';
@@ -114,6 +114,56 @@ export class TableDetailComponent implements OnInit, OnDestroy {
       
     // }
         this.db.collection('tables').doc(this.table[0].propertyId).update({
+          order:arrayUnion({meal,price,quantity})});
+
+
+        // this.tempOrder.push({meal,price,quantity: quantity +1})
+        // console.log(this.tempOrder,'new method');
+        
+    
+    
+      // if(this.tempOrder.includes(obj)){
+      //   console.log(meal);
+      //   this.tempOrder.push({meal,price,quantity: quantity +1})
+      //   this.db.collection('tables').doc(this.table[0].propertyId).update({order:(quantity +=1)})
+      // }else{
+      //   console.log('seka mealin');
+        
+      //   this.tempOrder.push({meal, price, quantity});
+      //   this.db.collection('tables').doc(this.table[0].propertyId).update({order:(this.tempOrder)})
+      // }
+
+      // for (let i = 0; i < this.tempOrder.length; i++) {
+
+        
+      
+      // if(this.order[i].meal == meal){
+      //   console.log(this.order[i].meal);}else{
+      //     console.log('blank');
+          
+      //   }
+        // this.db.collection('tables').doc(this.table[0].propertyId).update({order:(quantity +=1)})
+      // }else{
+        // console.log('seka mealin');
+         
+        // this.tempOrder.push({meal, price, quantity});
+        // this.db.collection('tables').doc(this.table[0].propertyId).update({order:(this.tempOrder)})
+      // }
+    // }
+
+
+
+
+
+
+
+      // if(this.order){
+      //   this.order.forEach((x:any) => { this.counts[x.meal] = (this.counts[x.meal] || 0) + 1; });
+      // }
+      // console.log(this.counts)
+      
+    // }
+        this.db.collection('tables').doc(this.table[0].propertyId).update({
           order:arrayUnion({meal,price,quantity})})
 
 
@@ -183,6 +233,34 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     console.log(this.total);
     
 
+  }
+
+  incrementMeal(meal: any){
+    meal.quantity += 1;
+    console.log(meal);
+    this.total += meal.price
+    console.log(this.total);
+    
+  }
+
+  decrementMeal(meal: any){
+    meal.quantity -= 1;
+    console.log(meal);
+    //todo kur de shkoje nder 0 qt ater ta fshoje kajt
+  }
+
+  deleteMeal(meal:any){
+    this.order.forEach((item:any, index:any ) => {
+      if (item == meal){
+        this.db.collection('tables').doc(this.table[0].propertyId).update({
+          order:arrayRemove(meal)})
+      }
+    });
+  }
+
+  calculateTotal(){
+    this.order.forEach((element:any) =>  this.total += element.price);
+    console.log(this.total);
   }
   
 

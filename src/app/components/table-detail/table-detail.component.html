@@ -40,10 +40,13 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-md-4" style="background-color: green;">
-            <h3>{{table[0]?.reserver}}</h3>
+        <div class="col-md-4 right-side-div" >
+            <h2 class="reserver">{{table[0]?.reserver}}</h2>
             <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="input-div">
+            <h3>Reserver: </h3>
             <input type="text" name="reserver" ngModel>
+            </div>
             </form>
 
             <div class="row" style="display: flex;">
@@ -56,7 +59,7 @@
                 <div class="col">
                 <p>Price</p>
                 </div>
-                <div><p>actions</p></div>
+
 
             </div>
 
@@ -66,22 +69,27 @@
                         <p *ngIf="item.quantity > 0">{{item.quantity}}</p>
                     </div>
                     <div class="col">
-                        <h2>{{item.meal}}</h2>
+                        <h3>{{item.meal}}</h3>
                     </div>
                     <div class="col">
                         <h5>{{item.price}}</h5>
                     </div>
                 </div>
-                <button (click)="incrementMeal(item)">+</button>
-                <button (click)="decrementMeal(item)">-</button>
+                <div style="display: flex;">
+                <button class="btn" (click)="incrementMeal(item)">+</button>
+                <button class="btn" (click)="decrementMeal(item)">-</button>
+                <button class="btn" (click)="deleteMeal(item)">X</button>
             </div>
-            <div style="display: flex; justify-content: space-around;">
-                <p>Total: {{total}}$</p>
+            </div>
+            <div class="total-div">
+                <p style="margin: 5px 40px 10px 0px;">Total: {{total}}$</p>
                 <button (click)="calculateTotal()">Buy</button>
             </div>
-        </div> -->
+        </div>
 
-        <div class="col-md-4" style="background-color: green;">
+
+
+        <!-- <div class="col-md-4" style="background-color: green;">
             <div class="row">
                 <h3>{{table[0]?.reserver}}</h3>
                 <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -92,14 +100,14 @@
                     <div class="col max-width-40">
                         <p class="max-width-40">Q</p>
                         <div class="col" *ngFor="let item of order">
-                            <p>{{item.quantity}}</p>
+                            <p *ngIf="item.quantity > 0" >{{item.quantity}}</p>
                         </div>
                     </div>
                     
                     <div class="col">
                         <p>Product</p>
                         <div class="col" *ngFor="let item of order">
-                            <h2>{{item.meal}}</h2>
+                            <h3>{{item.meal}}</h3>
                         </div>
                     </div>
                 
@@ -107,9 +115,10 @@
                         <p>Price</p>
                         <div class="col" style="display: flex;" *ngFor="let item of order">
                             <p>{{item.price}}</p>
-                            <div style="display: flex;">
+                            <div style="display: flex; margin-left: 45px;">
                                 <button (click)="incrementMeal(item)">+</button>
                                 <button (click)="decrementMeal(item)">-</button>
+                                <button (click)="deleteMeal(item)">X</button>
                             </div>
                             
                         </div>
@@ -120,7 +129,7 @@
                 
                 </div>
             </div>
-        </div>
+        </div> -->
         
     </div>
 </div>
