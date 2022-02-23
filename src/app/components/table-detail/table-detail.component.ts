@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { arrayRemove, arrayUnion } from 'firebase/firestore';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as firebase from 'firebase/compat';
+import { arrayRemove, arrayUnion, FieldValue } from 'firebase/firestore';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/table-model';
 import { DataService } from 'src/app/services/data.service';
@@ -24,8 +25,13 @@ export class TableDetailComponent implements OnInit, OnDestroy {
   price: any = [];
   order: any = [];
   total: number = 0;
+  closeResult = '';
 
-  constructor(private db: AngularFirestore, private activatedRoute: ActivatedRoute, private http: HttpClient, private data: DataService) { }
+  constructor(
+    private db: AngularFirestore, 
+    private activatedRoute: ActivatedRoute, 
+    private data: DataService,
+    private modalService: NgbModal) { }
 
     ngOnInit(){
     this.routeSub = this.activatedRoute.params.subscribe((params: Params)=>{
@@ -73,7 +79,7 @@ export class TableDetailComponent implements OnInit, OnDestroy {
     this.db.collection('tables').doc(this.table[0].propertyId).update({
       order:arrayUnion({meal,price,quantity})});
       this.total += price;
-      this.updateTotal(this.total)
+      this.updateTotal(this.total);
   }
 
   incrementMeal(meal: any){
@@ -109,6 +115,32 @@ export class TableDetailComponent implements OnInit, OnDestroy {
 
   updateTotal(price: number){
     this.db.collection('tables').doc(this.table[0].propertyId).update({total: price});
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      console.log(result);
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(reason);
+      if(reason == 'Cash' || 'Credit Card'){
+        this.updateTotal(0);
+        this.db.collection('tables').doc(this.table[0].propertyId).update({order: []})
+      }
+      
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 
