@@ -1,10 +1,10 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnDestroy, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
-import { collection, doc, setDoc } from "firebase/firestore";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { User } from 'src/app/models/user-model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +12,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
 
 
-  users: any;
+  users: User[] = [];
   password: string = '';
   waiter: string = '';
   warning = false;
+  usersSubscription: Subscription = new Subscription;
 
 
   constructor(private dataService: DataService, private router: Router, private afAuth: AngularFireAuth, private db: AngularFirestore) {
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.db.collection('users').valueChanges().subscribe((res) => {
-      this.users = res
+    this.usersSubscription = this.db.collection('users').valueChanges().subscribe((res:any) => {
+      this.users = res    
     });
   }
 
@@ -36,7 +37,6 @@ export class LoginComponent implements OnInit {
       if (this.waiter == user.username && this.password == user.password) {
         this.router.navigate(['/home']);
       } else if (this.waiter != user.username || this.password != user.password) {
-        console.log('wrong password');
         this.warning = true;
       }
     });
@@ -60,12 +60,16 @@ export class LoginComponent implements OnInit {
   onCodeChanged(a: any) {
     this.password += a.toString();
     if (this.password.length > 4) this.password = this.password.substring(0, 4);
-    console.log(this.password);
   }
 
   onCodeCompleted(a: any) {
-    console.log(a);
 
+  }
+
+  ngOnDestroy(): void {
+    if(this.usersSubscription){
+      this.usersSubscription.unsubscribe();
+    }
   }
 
 

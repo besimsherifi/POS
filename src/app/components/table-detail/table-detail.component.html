@@ -33,31 +33,32 @@
             </div>
             <hr>
             <div class="meal-div">
-                <div class="meal-card" (click)="mealClick(meal.title,price[i], meal.quantity = 1)" *ngFor="let meal of meals; let i = index;">
+                <div class="meal-card" (click)="mealClick(meal.title,price[i], meal.quantity = 1)"
+                    *ngFor="let meal of meals; let i = index;">
                     <img src="{{meal.image}}" alt="">
                     {{ (meal.title.length >= 20)? (meal.title | slice:0:15)+'..':(meal.title) }}
-                    <h2 >{{price[i]}}$</h2>
+                    <h2>{{price[i]}}$</h2>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 right-side-div" >
+        <div class="col-md-4 right-side-div">
             <h2 class="reserver">{{table[0]?.reserver}}</h2>
             <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
-            <div class="input-div">
-            <h3>Reserver: </h3>
-            <input type="text" name="reserver" ngModel>
-            </div>
+                <div class="input-div">
+                    <h3>Reserver: </h3>
+                    <input type="text" name="reserver" ngModel>
+                </div>
             </form>
 
             <div class="row" style="display: flex;">
                 <div class="col max-width-40">
-                <p class="max-width-40">Q</p>
+                    <p class="max-width-40">Q</p>
                 </div>
                 <div class="col">
-                <p>Product</p>
+                    <p>Product</p>
                 </div>
                 <div class="col">
-                <p>Price</p>
+                    <p>Price</p>
                 </div>
             </div>
 
@@ -74,10 +75,10 @@
                     </div>
                 </div>
                 <div style="display: flex;">
-                <button class="btn" (click)="incrementMeal(item)">+</button>
-                <button class="btn" (click)="decrementMeal(item)">-</button>
-                <button class="btn" (click)="deleteMeal(item)">X</button>
-            </div>
+                    <button class="btn" (click)="incrementMeal(item)">+</button>
+                    <button class="btn" (click)="decrementMeal(item)">-</button>
+                    <button class="btn" (click)="deleteMeal(item)">X</button>
+                </div>
             </div>
             <div class="total-div">
                 <p style="margin: 5px 40px 10px 0px;">Total: {{total}}$</p>
@@ -87,25 +88,26 @@
 
         <ng-template #content let-modal>
             <div class="modal-header">
-              <h4 class="modal-title" id="modal-basic-title">Payment</h4>
-              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                <h4 class="modal-title" id="modal-basic-title">Payment</h4>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"></button>
             </div>
             <div class="modal-body">
-              <div class="row center">
-                  <p>Total</p>
-                  <h2>${{total}}</h2>
-                  <div class="col pointer" (click)="modal.dismiss('Cash')">
-                    <img src="/assets/money.png" alt="">
-                    <p>Cash</p>
-                  </div>
-                  <div class="col pointer" (click)="modal.dismiss('Credit Card')">
-                    <img src="/assets/credit-card.png" alt="">
-                    <p>Credit Card</p>
-                  </div>
-              </div>
+                <div class="row center">
+                    <p>Total</p>
+                    <h2>${{total}}</h2>
+                    <div class="col pointer" (click)="modal.dismiss('Cash')">
+                        <img src="/assets/money.png" alt="">
+                        <p>Cash</p>
+                    </div>
+                    <div class="col pointer" (click)="modal.dismiss('Credit Card')">
+                        <img src="/assets/credit-card.png" alt="">
+                        <p>Credit Card</p>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
             </div>
-          </ng-template>
+        </ng-template>
     </div>
 </div>

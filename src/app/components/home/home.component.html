@@ -12,7 +12,7 @@
 
 <div class="container" *ngIf="mainFloor">
     <div class="row table-bottom-margin" style="margin-top: 10px;">
-        <img src="../../../assets/lampp.png" alt="" class="lamps">
+        <img *ngIf="isSmallScreen" src="../../../assets/lampp.png" alt="" class="lamps">
 
         <div class="col" *ngFor="let table of tables | slice:0:3; let i = index;" >
             <div  class="tables" [ngClass]="table.reserver ? 'red' : 'green'" (click)="tableDetail(table.number)">
@@ -29,7 +29,7 @@
                 <h5>{{table.persons}}p</h5>
             </div>
         </div>
-        <img src="../../../assets/lampp.png" alt="" class="lamps">
+        <img *ngIf="isSmallScreen" src="../../../assets/lampp.png" alt="" class="lamps">
     </div>
     <div class="row table-bottom-margin">
         <div class="col" *ngFor="let table of tables | slice:6:11; let i = index" >
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="row table-bottom-margin">
-        <div class="col-md-6">
+        <div *ngIf="isSmallScreen" class="col-md-6">
             <img src="../../../assets/flower.png" class="flowers" alt="">
             <img src="../../../assets/flower.png" class="flowers" alt="">
         </div>
@@ -63,10 +63,10 @@
             </div>
         </div>
         <div class="col">
-            <img src="../../../assets/sofa.png" class="sofa" alt="">
+            <img *ngIf="isSmallScreen" src="../../../assets/sofa.png" class="sofa" alt="">
         </div>
         <div class="col">
-            <img src="../../../assets/flower.png" class="flowers" alt="">
+            <img *ngIf="isSmallScreen" src="../../../assets/flower.png" class="flowers" alt="">
         </div>
     </div>
 </div>

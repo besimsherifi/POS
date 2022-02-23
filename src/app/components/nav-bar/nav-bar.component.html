@@ -1,17 +1,17 @@
 <nav class="navbar navbar-expand-lg ">
     <a class="navbar-brand">myPOS</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">x</span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <!-- <ul class="navbar-nav">
         <div [routerLink]="['/reservations']" routerLinkActive="router-link-active" class="reservation d-flex" *ngIf="showWaiter">
           <li>Reservation</li>
         <mat-icon>
           import_contacts
           </mat-icon>
         </div>
-      </ul>
+      </ul> -->
     </div>
     <div class="time-and-date">
      <p style="margin:0; font-weight:200;">{{currentDate | date:'EEEE, MMM d, y '}}</p>  
@@ -23,11 +23,11 @@
       <div class="btn-group" dropdown>
         <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                 aria-controls="dropdown-basic">
-          waiter 1<span class="caret"></span>
+          {{waiter}}<span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
             role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item">Log Out</a></li>
+          <li role="menuitem"><a class="dropdown-item" (click)="onLogOut()">Log Out</a></li>
         </ul>
       </div>
     </div>

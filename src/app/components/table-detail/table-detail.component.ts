@@ -1,13 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { arrayRemove, arrayUnion } from 'firebase/firestore';
 import swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/table-model';
 import { DataService } from 'src/app/services/data.service';
+import { Meal } from 'src/app/models/meal-model';
+import { Order } from 'src/app/models/order-model';
 
 @Component({
   selector: 'app-table-detail',
@@ -17,25 +19,26 @@ import { DataService } from 'src/app/services/data.service';
 export class TableDetailComponent implements OnInit, OnDestroy {
   table: Table[] = [];
   tableId: number = 0;
-  meals: any = [];
-  routeSub: Subscription = new Subscription();
-  price: any = [];
-  order: any = [];
+  meals: Meal[] = [];
+  price: number[] = [];
+  order: Order[] = [];
   total: number = 0;
   closeResult = '';
+  subscriptions: Subscription[] = []
 
   constructor(
     private db: AngularFirestore,
     private activatedRoute: ActivatedRoute,
     private data: DataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
+    this.subscriptions.push(this.activatedRoute.params.subscribe((params: Params) => {
       this.tableId = Number(params['id']);
-    });
-    this.db
+    }));
+    this.subscriptions.push(this.db
       .collection('tables', (ref) => ref.where('number', '==', this.tableId))
       .valueChanges({ idField: 'propertyId' })
       .subscribe((res: any) => {
@@ -46,7 +49,7 @@ export class TableDetailComponent implements OnInit, OnDestroy {
         } else {
           this.total = res[0].total;
         }
-      });
+      }));      
   }
 
   onSubmit(form: NgForm) {
@@ -141,7 +144,6 @@ export class TableDetailComponent implements OnInit, OnDestroy {
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;
-          console.log(result);
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -151,11 +153,16 @@ export class TableDetailComponent implements OnInit, OnDestroy {
               .collection('tables')
               .doc(this.table[0].propertyId)
               .update({ order: [] });
-          }
+              this.db
+              .collection('tables')
+              .doc(this.table[0].propertyId)
+              .update({ reserver: '' });
+          };
           swal.fire({
             icon: 'success',
             title: 'Payment Done',
           })
+          this.router.navigate(['/home'])
         }
       );
     }
@@ -173,8 +180,10 @@ export class TableDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
+    if (this.subscriptions) {
+      this.subscriptions.forEach(subscription => {
+        subscription.unsubscribe();
+      })
     }
   }
 }
