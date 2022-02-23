@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 
@@ -19,7 +20,7 @@ export class NavBarComponent implements OnInit {
     this.open = false;
   }
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.waiter.subscribe((res) => {
@@ -29,6 +30,10 @@ export class NavBarComponent implements OnInit {
     setInterval(() => {
       this.currentDate = new Date();  //ki osht procesi i update-imit tminutave
     }, 1);
+  }
+
+  onLogOut(){
+    this.router.navigate(['/login'])
   }
 
   currentDate = new Date();
