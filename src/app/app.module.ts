@@ -23,6 +23,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableDetailComponent } from './components/table-detail/table-detail.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpHeadersInterceptor } from './services/http-headers.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -51,7 +52,8 @@ import { HttpHeadersInterceptor } from './services/http-headers.interceptor';
     MaterialModule,
     CodeInputModule,
     BsDropdownModule.forRoot(),
-    DragDropModule
+    DragDropModule,
+    NgbModule
   ],
   providers: [
     {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
   tables:Table[] = [];
   mainFloor = true;
 
-  constructor(private router: Router, private db: AngularFirestore, private http:HttpClient, private data: DataService) { }
+  constructor(private router: Router, private data: DataService) { }
 
   ngOnInit(): void {
     this.data.getTables().subscribe((res:any) => {

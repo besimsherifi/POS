@@ -81,53 +81,31 @@
             </div>
             <div class="total-div">
                 <p style="margin: 5px 40px 10px 0px;">Total: {{total}}$</p>
-                <button class="btn">Buy</button>
+                <button class="btn" (click)="open(content)">Pay</button>
             </div>
         </div>
 
-
-
-        <!-- <div class="col-md-4" style="background-color: green;">
-            <div class="row">
-                <h3>{{table[0]?.reserver}}</h3>
-                <form *ngIf="table[0]?.reserver == ''" (ngSubmit)="onSubmit(form)" #form="ngForm">
-                <input type="text" name="reserver" ngModel>
-                </form>
-    
-                <div class="row" style="display: contents;">
-                    <div class="col max-width-40">
-                        <p class="max-width-40">Q</p>
-                        <div class="col" *ngFor="let item of order">
-                            <p *ngIf="item.quantity > 0" >{{item.quantity}}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col">
-                        <p>Product</p>
-                        <div class="col" *ngFor="let item of order">
-                            <h3>{{item.meal}}</h3>
-                        </div>
-                    </div>
-                
-                    <div class="col">
-                        <p>Price</p>
-                        <div class="col" style="display: flex;" *ngFor="let item of order">
-                            <p>{{item.price}}</p>
-                            <div style="display: flex; margin-left: 45px;">
-                                <button (click)="incrementMeal(item)">+</button>
-                                <button (click)="decrementMeal(item)">-</button>
-                                <button (click)="deleteMeal(item)">X</button>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-
-                
-                
-                </div>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Payment</h4>
+              <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
             </div>
-        </div> -->
-        
+            <div class="modal-body">
+              <div class="row center">
+                  <p>Total</p>
+                  <h2>${{total}}</h2>
+                  <div class="col pointer" (click)="modal.dismiss('Cash')">
+                    <img src="/assets/money.png" alt="">
+                    <p>Cash</p>
+                  </div>
+                  <div class="col pointer" (click)="modal.dismiss('Credit Card')">
+                    <img src="/assets/credit-card.png" alt="">
+                    <p>Credit Card</p>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </ng-template>
     </div>
 </div>
